@@ -1,0 +1,103 @@
+CS 1380 Homework 23 - Player Cards (Structures)
+Name: Natalia
+
+
+Part A
+
+1. In one sentence, why put name, jersey, and points in one struct instead of
+three separate variables?
+
+A struct keeps a player's name, jersey, and points together, so I can pass one
+player instead of three separate variables that could get mixed up.
+
+2. What does p->jersey mean, and how is it different from p.jersey?
+
+p->jersey is used when p is a pointer to a struct. p.jersey is used when I have
+the struct itself, not a pointer. Both access the jersey member, and p->jersey
+is the same as (*p).jersey.
+
+3. Why must init_player leave room for '\0' when copying into name[32]?
+
+A C string must end with '\0'. If I filled all 32 spaces with characters, there
+would be no end marker, and printf could keep reading past the array. So I copy
+at most 31 characters and set name[31] to '\0'.
+
+
+Part B
+
+4. Why does add_points take struct Player * instead of struct Player by value?
+
+It takes a pointer so it can change the caller's original struct. If it took the
+struct by value, it would only change a copy, and the original points would stay
+the same.
+
+5. If you have struct Player roster[3], how do you pass the second player to
+print_player?
+
+print_player(&roster[1]);
+
+roster[1] is the second player because array indexing starts at 0, and the &
+gives the function that player's address.
+
+
+Part C
+
+6. What is a coding agent, and how is it different from plain autocomplete?
+
+A coding agent is an AI model that can use tools, like reading and editing
+files and running shell commands, and work through multiple steps on a task.
+Plain autocomplete only suggests the next few tokens of code and does not take
+actions.
+
+7. The manager-of-an-intern example for init_player.
+
+Like a manager guiding an intern, I would give a clear task and then correct
+what comes back. For init_player, I would tell the agent to check that p and
+name are not NULL, copy at most 31 characters, and set name[31] to '\0'. If it
+used strcpy, I would send it back to change it to strncpy.
+
+8. Two risks from "What to watch out for," and what I will do differently.
+
+First, the agent can get stuck in a debugging spiral, going down the wrong path
+while trying to fix a problem. Next time I will stop it, step back, and give it
+a different approach instead of letting it keep trying.
+
+Second, overreliance can leave me with a shallow understanding of my own code.
+I will read every change and make sure I can explain it before I accept it.
+
+9. Why do agent tools ask you to confirm a tool call before it runs?
+
+Confirmation lets me see what the agent is about to do, and stop it, before it
+edits my files or runs a command that could cause damage.
+
+10. One check to run after an agent edits your C file.
+
+I would compile with gcc -Wall -Wextra -Wpedantic -std=c23 -g -o player main.c
+player.c, run ./player to make sure the output still matches, and re-read the
+diff to see exactly what changed.
+
+
+
+
+Git
+
+git status:
+(paste after committing)
+
+git log --oneline:
+(paste after committing)
+
+git status:
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	i_usage_log.txt
+	player.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+git log --oneline:
+7fa8252 Add main demo
+200d847 Add Player struct and helper functions
